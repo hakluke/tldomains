@@ -16,15 +16,15 @@ type Tldomains struct {
 }
 
 // New creates a new *tldomains using the specified filepath
-func New(cacheFile string) (*tldomains, error) {
+func New(cacheFile string) (*Tldomains, error) {
 	data, err := ioutil.ReadFile(cacheFile)
 	if err != nil {
 		data, err = download()
 		if err != nil {
-			return &tldomains{}, err
+			return &Tldomains{}, err
 		}
 		if err = ioutil.WriteFile(cacheFile, data, 0644); err != nil {
-			return &tldomains{}, err
+			return &Tldomains{}, err
 		}
 	}
 	list := strings.Split(string(data), "\n")
@@ -35,7 +35,7 @@ func New(cacheFile string) (*tldomains, error) {
 		tlds[item] = struct{}{}
 	}
 
-	return &tldomains{CacheFile: cacheFile}, nil
+	return &Tldomains{CacheFile: cacheFile}, nil
 }
 
 // Host contains the parsed info for the domain
@@ -44,7 +44,7 @@ type Host struct {
 }
 
 // Parse extracts a domain into it's component parts
-func (extract *tldomains) Parse(host string) Host {
+func (extract *Tldomains) Parse(host string) Host {
 	var h Host
 
 	nhost := strings.ToLower(host)
