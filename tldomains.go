@@ -10,7 +10,7 @@ import (
 
 var tlds = make(map[string]struct{}, 0)
 
-// Tldomains contains the cache file
+// Tldomains contains the cache file (to avoid a http request to get TLDs every time)
 type Tldomains struct {
 	CacheFile string
 }
