@@ -1,3 +1,3 @@
-module github.com/jakewarren/tldomains
+module github.com/hakluke/tldomains
 
 go 1.13
